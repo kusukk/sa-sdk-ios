@@ -84,16 +84,15 @@
     NSMutableArray *delegateMethods = [NSMutableArray array];
     id delegate;
     SEL delegateSelector = NSSelectorFromString(@"delegate");
-    if ([object respondsToSelector:delegateSelector]) {
+    if (classDescription && [[classDescription delegateInfos] count] > 0 && [object respondsToSelector:delegateSelector]) {
         delegate = ((id (*)(id, SEL))[object methodForSelector:delegateSelector])(object, delegateSelector);
-        if (classDescription && [[classDescription delegateInfos] count] > 0 && [object respondsToSelector:delegateSelector]) {
             for (SADelegateInfo *delegateInfo in [classDescription delegateInfos]) {
                 if ([delegate respondsToSelector:NSSelectorFromString(delegateInfo.selectorName)]) {
                     [delegateMethods addObject:delegateInfo.selectorName];
                 }
             }
-        }
     }
+
 
     NSDictionary *serializedObject = @{
         @"id": [_objectIdentityProvider identifierForObject:object],
