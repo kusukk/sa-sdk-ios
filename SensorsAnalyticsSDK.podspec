@@ -1,5 +1,5 @@
 Pod::Spec.new do |s|
-  s.name         = "SensorsAnalyticsSDK_Test"
+  s.name         = "SensorsAnalyticsSDK"
   s.version      = "1.10.20"
   s.summary      = "The offical iOS SDK of Sensors Analytics."
   s.homepage     = "http://www.sensorsdata.cn"
